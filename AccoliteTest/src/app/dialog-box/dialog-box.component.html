@@ -1,0 +1,101 @@
+
+  <!--dialog-box.component.html  -->
+  <h1 mat-dialog-title>Row Action :: <strong>{{action}}</strong></h1>
+  <div mat-dialog-content>
+  <mat-card>
+
+  <form [formGroup]="ownerForm" autocomplete="off" novalidate   fxLayout="column wrap"
+  fxLayoutAlign="center center" fxLayoutGap="10px">
+  <mat-card-content>
+  
+  <!--
+  <mat-form-field *ngIf="action != 'Delete'; else elseTemplate">
+    <input placeholder="{{action}} Opportunit Id" matInput [(ngModel)]="local_data.opportunityid">
+  </mat-form-field>-->
+  <mat-form-field *ngIf="action != 'Delete'; else elseTemplate">
+    <input placeholder="{{action}} Opportunity Description" matInput [(ngModel)]="local_data.opportunitydescription" formControlName="opportunitydescription" id="opportunitydescription">
+    
+    <mat-error *ngIf="hasError('opportunitydescription', 'required')">Description is required</mat-error>
+    <mat-error *ngIf="hasError('opportunitydescription', 'maxlength')">You have more than 60 characters</mat-error>
+  </mat-form-field >
+  <mat-form-field *ngIf="action != 'Delete'; ">
+    <input placeholder="{{action}} Location" matInput [(ngModel)]="local_data.location" formControlName="location" id="location">
+    
+    <mat-error *ngIf="hasError('location', 'required')">Location is required</mat-error>
+    <mat-error *ngIf="hasError('location', 'maxlength')">You have more than 60 characters</mat-error>
+  
+  </mat-form-field >
+  <mat-form-field *ngIf="action != 'Delete'; ">
+    <input placeholder="{{action}} Skills" matInput [(ngModel)]="local_data.skills" formControlName="skills" id="skills">
+    <mat-error *ngIf="hasError('skills', 'required')">Skills is required</mat-error>
+    <mat-error *ngIf="hasError('skills', 'maxlength')">You have more than 60 characters</mat-error>
+  
+  </mat-form-field >
+  <mat-form-field *ngIf="action != 'Delete'; ">
+    <input placeholder="{{action}} Opening Count" matInput [(ngModel)]="local_data.openingcount" formControlName="openingcount" id="openingcount">
+    <mat-error *ngIf="hasError('openingcount', 'required')">Openings is required</mat-error>
+    <mat-error *ngIf="hasError('openingcount', 'maxlength')">You have more than 60 characters</mat-error>
+  
+  </mat-form-field >
+  <mat-form-field *ngIf="action != 'Delete'; ">
+    <input placeholder="{{action}} Project Duration" matInput [(ngModel)]="local_data.projectduration" formControlName="projectduration" id="projectduration">
+    <mat-error *ngIf="hasError('projectduration', 'required')">Project Duration is required</mat-error>
+    <mat-error *ngIf="hasError('projectduration', 'maxlength')">You have more than 60 characters</mat-error>
+  
+  </mat-form-field>
+  <!--
+  <mat-form-field *ngIf="action != 'Delete'; ">
+    <input placeholder="{{action}} Last Date To Apply" matInput [(ngModel)]="local_data.lastdatetoapply">
+  </mat-form-field>
+  -->
+  
+  
+
+  <mat-form-field>
+    <input *ngIf="action != 'Delete';" matInput [matDatepicker]="picker" placeholder="Last Date to Apply" formControlName="lastdatetoapply" id="lastdatetoapply" 
+        readonly (click)="picker.open()" [(ngModel)]="local_data.lastdatetoapply">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <mat-error *ngIf="hasError('lastdatetoapply', 'required')">Last Date to Apply is required</mat-error>
+    
+  </mat-form-field>
+  <mat-form-field *ngIf="action != 'Delete'; ">
+    <input placeholder="{{action}} Experiance" matInput [(ngModel)]="local_data.experience" formControlName="experience" id="experience">
+    <mat-error *ngIf="hasError('projectduration', 'required')">Experience is required</mat-error>
+    
+  </mat-form-field>
+  <mat-form-field *ngIf="action != 'Delete'; ">
+    
+    <input placeholder="{{action}} Manager Name" matInput [(ngModel)]="local_data.managername" formControlName="managername" id="managername">
+    <mat-error *ngIf="hasError('projectduration', 'required')">Manager Name is required</mat-error>
+    
+  </mat-form-field>
+  <mat-form-field *ngIf="action != 'Delete'; ">
+    <input type="email" placeholder="{{action}} Manager Email" matInput [(ngModel)]="local_data.manageremail" formControlName="manageremail">
+    <mat-error *ngIf="hasError('opportunitydescription', 'required')">Email is not Valid</mat-error>
+    <mat-error *ngIf="hasError('opportunitydescription', 'maxlength')">You have more than 60 characters</mat-error>
+  </mat-form-field>
+ 
+  <ng-template #elseTemplate>
+    Sure to delete <b>{{local_data.opportunitydescription}}</b>?
+  </ng-template>
+</mat-card-content>
+
+  
+
+
+  </form>
+</mat-card>
+  
+
+  </div>
+<div mat-dialog-actions>
+  <button mat-button (click)="doAction()">{{action}}</button>
+  <button mat-button (click)="closeDialog()" mat-flat-button color="warn">Cancel</button>
+</div>
+
+<!--Dialog Content Ends-->
+
+
+
+

@@ -1,0 +1,29 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+    <span><img src="../assets/Accolite_logo1.jpg" class="image-responsive" style="width:150px;height:60px;" ></span>
+    <button mat-button [routerLink] = "['/home']"  routerLinkActive = "active">Home</button>
+    <button mat-button [routerLink] = "['/trends']"  routerLinkActive = "active">Trends</button>
+        
+    <span class="example-spacer"></span>
+        <span class="align-center"></span>
+        <span class="example-spacer"></span>
+        <button mat-button (click)="logout()" routerLinkActive = "active">Logout</button>
+        
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <mat-icon>dialpad</mat-icon>
+        <span>Redial</span>
+      </button>
+      <button mat-menu-item disabled>
+        <mat-icon>voicemail</mat-icon>
+        <span>Check voicemail</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>notifications_off</mat-icon>
+        <span>Disable alerts</span>
+      </button>
+    </mat-menu>
+     </mat-toolbar-row>
