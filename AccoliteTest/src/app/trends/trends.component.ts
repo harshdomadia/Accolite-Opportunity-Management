@@ -31,12 +31,11 @@ export class TrendsComponent implements OnInit {
   }
   charts: Charts[] = [
     {value: 'line', viewValue: 'Line Chart'},
-    {value: 'bar', viewValue: 'Bar Chart'},
-    {value: 'bubble', viewValue: 'Bubble Chart'}
+    {value: 'bar', viewValue: 'Bar Chart'}
   ];
   language: Language[] = [
-    {value: [10,14,15,15,17], viewValue: 'Java'},
-    {value: [8,6,8,5,10,12], viewValue: 'Python'},
+    {value: [2,2,3,3,4], viewValue: 'Java'},
+    {value: [8,6,8,5,10], viewValue: 'Python'},
     {value: [10,10,12,9,13], viewValue: 'Angular'}
   ];
 
@@ -46,29 +45,33 @@ export class TrendsComponent implements OnInit {
       xAxes: [{
         ticks: {
           min: 2015,
-          max: 2020,
+          max: 2019,
         }
       }]
     }
   };
   
-  ChartLabels: Label[] = ['2015', '2016','2017','2018','2019','2020'];
-  ChartData: ChartDataSets[] = [
-    { data: this.selected2, label: '' }
-  ];
+  changeChart(value){
+    this.chartType = value;
+  }
+  changeLanguage(value){
+    this.chartData = [
+      { data: value ,label: 'No of Projects Per Year' }
+    ];
+  }
 
   //public chartType: ChartType = ;
   barChartOptions: ChartOptions = {
     responsive: true,
   };
-  chartLabels: Label[] = ['2015', '2016', '2017', '2018', '2019', '2020'];
-  chartType: ChartType = 'bar';
+  chartLabels: Label[] = ['2015', '2016', '2017', '2018', '2019'];
+  chartType: ChartType="bar";
   chartLegend = true;
   chartPlugins = [];
 
-  chartData: ChartDataSets[] = [
-    { data: [10,14,15,15,17], label: 'No of Projects Per Year' }
-  ];
+  chartData: ChartDataSets[]=[
+    { data:[10,14,15,15,17] ,label: 'No of Projects Per Year' }
+  ];;
 
 
 }

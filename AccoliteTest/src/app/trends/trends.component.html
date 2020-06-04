@@ -1,33 +1,39 @@
 <app-header></app-header>
 
 
-<div select >
-    <mat-form-field>
-        <mat-label>Select Chart Type</mat-label>
-        <mat-select [(value)]="selected1">
-          <mat-option>None</mat-option>
-          <mat-option [value]="option.value" *ngFor="let option of charts">{{ option.viewValue }}</mat-option>
-        </mat-select>
-      </mat-form-field>
-      &nbsp;
+
+
+<div class="chart-wrapper" style="max-height: 1000px; max-width: 1000px; height:70%;width:70%;">
+    <h3 style="text-align: center;">Year vs Language Distribution</h3>
+
+    <div select  style="align-content: center;">
       <mat-form-field>
-        <mat-label>Select Language</mat-label>
-        <mat-select [(value)]="selected2">
-          <mat-option>None</mat-option>
-          <mat-option [value]="option.value" *ngFor="let option of language">{{ option.viewValue }}</mat-option>
-        </mat-select>
-      </mat-form-field>
+          <mat-label>Select Chart Type</mat-label>
+          <mat-select [(value)]="selected1" #chartValue (selectionChange)="changeChart($event.value)">
 
-</div>
+            <mat-option [value]="option.value" *ngFor="let option of charts" >{{ option.viewValue }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        &nbsp;
+        <mat-form-field>
+          <mat-label>Select Language</mat-label>
+          <mat-select [(value)]="selected2" #languageValue (selectionChange)="changeLanguage($event.value)">
+
+            <mat-option [value]="option.value" *ngFor="let option of language">{{ option.viewValue }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+  </div>
+  
 
 
-<div class="chart-wrapper">
     <canvas baseChart 
     [datasets]="chartData"
     [labels]="chartLabels"
     [options]="chartOptions"
     [plugins]="chartPlugins"
     [legend]="chartLegend"
-    [chartType]="chartType">
+    [chartType]="chartType"
+    >
   </canvas>
 </div>
