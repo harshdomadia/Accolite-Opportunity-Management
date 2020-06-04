@@ -26,6 +26,7 @@ import { ChartsModule } from 'ng2-charts';
 import {MatSelectModule} from '@angular/material/select';
 import{ MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import {UserServiceService} from './user-service.service';
 
 
 
@@ -78,7 +79,7 @@ import { MatNativeDateModule } from '@angular/material/core';
   entryComponents: [
     DialogBoxComponent
   ],
-  providers: [],
+  providers: [UserServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

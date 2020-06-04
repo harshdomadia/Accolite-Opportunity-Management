@@ -22,7 +22,7 @@ interface Language {
 
 
 export class TrendsComponent implements OnInit {
-  selected1:any;
+  selected1:any = '';
   selected2:any;
 
   constructor(private router: Router, public zone: NgZone) { }

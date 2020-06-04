@@ -2,6 +2,7 @@ import { Component,OnInit,ElementRef } from '@angular/core';
 import {Router} from '@angular/router';
 import {MatDialogModule} from '@angular/material/dialog';
 import { NgZone } from '@angular/core';
+import {UserServiceService} from '../user-service.service'
 declare const gapi: any;
 @Component({
   selector: 'app-login',
@@ -16,9 +17,10 @@ export class LoginComponent implements OnInit {
   user:any = {};
 
 
-constructor(private router: Router, private element: ElementRef,public zone: NgZone) {
+constructor(private router: Router, private element: ElementRef,public zone: NgZone,private userService: UserServiceService) {
   console.log('ElementRef: ', this.element);
   this.isSignedIn = false;
+  this.googleInit()
   
  }
 
@@ -42,7 +44,7 @@ constructor(private router: Router, private element: ElementRef,public zone: NgZ
   ngOnInit() {
     document.body.classList.add('bg-img');
     
-    this.googleInit()
+    
   }
   
   public auth2: any;
@@ -59,6 +61,9 @@ constructor(private router: Router, private element: ElementRef,public zone: NgZ
 
   
   public attachSignin() {
+    
+
+
     var element = document.getElementById('googleBtn');
     this.auth2.attachClickHandler(element, {},
       (googleUser) => {
@@ -77,6 +82,35 @@ constructor(private router: Router, private element: ElementRef,public zone: NgZ
         localStorage.setItem('User',JSON.stringify(this.user));
         this.zone.run(() => { this.router.navigate(['/home']); });
         //YOUR CODE HERE
+
+
+
+        // Checking and using the user servces
+        if(localStorage.getItem('User1')!=null){
+          if(this.userService.checkUserExsis(JSON.parse(localStorage.getItem('User1')).emailid,googleUser.getAuthResponse().id_token)){
+            alert("Login Successfull");
+          }
+          
+        }
+        else{
+          this.userService.addUsers(profile.getEmail(),googleUser.getAuthResponse().id_token);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+    ///////////////////////
+
+
+
 
 
       }, (error) => {
