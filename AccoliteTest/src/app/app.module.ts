@@ -67,7 +67,8 @@ import {UserServiceService} from './user-service.service';
    ChartsModule,
    MatSelectModule,
    MatDatepickerModule ,
-   MatNativeDateModule
+   MatNativeDateModule,
+   MatMenuModule
 
    
 

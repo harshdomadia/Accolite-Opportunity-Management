@@ -39,7 +39,7 @@ export class DialogBoxComponent implements OnInit {
     document.body.classList.remove('bg-img');
     this.ownerForm = new FormGroup({
       opportunitydescription: new FormControl('', [Validators.required, Validators.maxLength(60)]),
-      manageremail: new FormControl('', [Validators.required, Validators.maxLength(100)]),
+      manageremail: new FormControl('', [Validators.required, Validators.maxLength(100),Validators.pattern("[^ @]*@[^ @]*")]),
       location:new FormControl('', [Validators.required, Validators.maxLength(100)]),
       skills:new FormControl('', [Validators.required, Validators.maxLength(100)]),
       openingcount:new FormControl('', [Validators.required, Validators.maxLength(100)]),
@@ -61,6 +61,7 @@ export class DialogBoxComponent implements OnInit {
 
   doAction(){
     if (this.ownerForm.valid && (this.action==='Add' || this.action==='Update')) {
+      window.alert("Records Modified");
       this.dialogRef.close({event:this.action,data:this.local_data});
     }
     else if (this.action==='Delete') {

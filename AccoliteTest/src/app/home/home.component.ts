@@ -85,6 +85,7 @@ export class HomeComponent implements OnInit {
   applicant: Applicant[];
   dataSource:any;
   users:any;
+  users1:any;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
@@ -93,16 +94,23 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     document.body.classList.remove('bg-img');
     this.users=localStorage.getItem('User');
+    this.users1=localStorage.getItem('User1');
     
-    if(this.users == null){
+    if(this.users == null && this.users1 == null){
       alert("Login Unsuccessfull");
       this.zone.run(() => { this.router.navigate(['/login']); });
       localStorage.removeItem('User');
+      localStorage.removeItem('User1');
     }
     alert("Login Successfull");
     
       let url = "http://localhost:9095/api/get";
-      this.http.get<UsersData[]>(url).subscribe(res => {
+      const headersGet:HttpHeaders  = new HttpHeaders({
+
+        'emailid':(JSON.parse(localStorage.getItem('User1'))).emailid,
+        'token':(JSON.parse(localStorage.getItem('User1'))).token
+      });
+      this.http.get<UsersData[]>(url,  { headers:headersGet  }  ).subscribe(res => {
         this.listData = new MatTableDataSource(res);
         //setTimeout(() => this.dataSource.sort = this.sort);
         this.listData.sort = this.sort;
@@ -186,7 +194,12 @@ export class HomeComponent implements OnInit {
     
     let urlCreate = 'http://localhost:9095/api/create';
     this.table.renderRows();
-    return this.http.post<UsersData[]>(urlCreate, newData).subscribe(res=>{
+    const headersAdd:HttpHeaders  = new HttpHeaders({
+
+      'emailid':(JSON.parse(localStorage.getItem('User1'))).emailid,
+      'token':(JSON.parse(localStorage.getItem('User1'))).token
+    });
+    return this.http.post<UsersData[]>(urlCreate, newData,{headers:headersAdd}).subscribe(res=>{
               //console.log("before"+this.listData.data);
               //console.log(res)
               //this.listData.data = [];
@@ -253,8 +266,13 @@ export class HomeComponent implements OnInit {
       createremail:JSON.parse(localStorage.getItem('User')).EmailId
     };
     let urlUpdate = 'http://localhost:9095/api/update';
+    const headersUpdate:HttpHeaders  = new HttpHeaders({
 
-    return this.http.put<Applicant>(urlUpdate, updatedData).subscribe(res=>{
+      'emailid':(JSON.parse(localStorage.getItem('User1'))).emailid,
+      'token':(JSON.parse(localStorage.getItem('User1'))).token
+    });
+
+    return this.http.put<Applicant>(urlUpdate, updatedData,{headers:headersUpdate}).subscribe(res=>{
 
     },err =>{
       alert("Could not add data");
@@ -266,10 +284,14 @@ export class HomeComponent implements OnInit {
 
     let urlDelete = 'http://localhost:9095/api/delete';
 
-    
+    const headersDelete:HttpHeaders  = new HttpHeaders({
+
+      'emailid':(JSON.parse(localStorage.getItem('User1'))).emailid,
+      'token':(JSON.parse(localStorage.getItem('User1'))).token
+    });
 
     
-   this.http.delete<Applicant>(`${urlDelete}/${row_obj.opportunityid}`).subscribe(res=>{
+   this.http.delete<Applicant>(`${urlDelete}/${row_obj.opportunityid}`,{headers:headersDelete}).subscribe(res=>{
 
     },err =>{
       alert(JSON.stringify(err));

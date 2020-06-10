@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {Router} from '@angular/router';
+import { NgZone } from '@angular/core';
 
 export interface Users{
   userid:number;
@@ -12,7 +14,7 @@ export interface Users{
 })
 export class UserServiceService {
 
-  constructor( private http:HttpClient) { }
+  constructor( private http:HttpClient,public zone: NgZone,private router: Router) { }
 
     checkUserExsis(email,token): boolean{
       console.log("Email in check"+email);
@@ -44,11 +46,12 @@ export class UserServiceService {
             token:res.token,
           };
           console.log(updatedData);
-          let urlUpdate = '/api/updateUser';
+          let urlUpdate = 'http://localhost:9095/api/updateUser';
       
           this.http.put<Users[]>(urlUpdate, updatedData).subscribe(res=>{
             
             localStorage.setItem('User1',JSON.stringify(updatedData));
+            this.zone.run(() => { this.router.navigate(['/home']); });
       
           },err =>{
             alert("Could not add data");
@@ -72,7 +75,7 @@ export class UserServiceService {
         token:token
       }
       const headers = new HttpHeaders({ 'Content-Type': 'application/json'});  
-      let urlAdd = "/api/addUser";
+      let urlAdd = "http://localhost:9095/api/addUser";
       console.log("Inside New User"+JSON.stringify(userNew));
 
       this.http.post<Users[]>(urlAdd,userNew).subscribe(res =>{
@@ -84,6 +87,7 @@ export class UserServiceService {
         }
         
         localStorage.setItem('User1',JSON.stringify(userNew2));
+        this.zone.run(() => { this.router.navigate(['/home']); });
           return true;
       },err=>{
 
@@ -95,7 +99,7 @@ export class UserServiceService {
 
     deleteUser(id){
 
-      let urlDelete = '/api/deleteUser';
+      let urlDelete = 'http://localhost:9095/api/deleteUser';
 
       this.http.delete<Users>(`${urlDelete}/${id}`).subscribe(res=>{
         localStorage.removeItem("User1");

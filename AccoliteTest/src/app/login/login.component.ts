@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
 constructor(private router: Router, private element: ElementRef,public zone: NgZone,private userService: UserServiceService) {
   console.log('ElementRef: ', this.element);
   this.isSignedIn = false;
-  this.googleInit()
+  this.googleInit();
   
  }
 
@@ -80,21 +80,24 @@ constructor(private router: Router, private element: ElementRef,public zone: NgZ
           'Token':googleUser.getAuthResponse().id_token
         };
         localStorage.setItem('User',JSON.stringify(this.user));
-        this.zone.run(() => { this.router.navigate(['/home']); });
+        //localStorage.setItem('User1',JSON.stringify(userNew2));
+        
         //YOUR CODE HERE
 
 
 
         // Checking and using the user servces
-        if(localStorage.getItem('User1')!=null){
-          if(this.userService.checkUserExsis(JSON.parse(localStorage.getItem('User1')).emailid,googleUser.getAuthResponse().id_token)){
+        
+        
+          if(localStorage.getItem('User1')!=null && this.userService.checkUserExsis(JSON.parse(localStorage.getItem('User1')).emailid,googleUser.getAuthResponse().id_token)){
             alert("Login Successfull");
+            //this.zone.run(() => { this.router.navigate(['/home']); });
           }
-          
-        }
         else{
           this.userService.addUsers(profile.getEmail(),googleUser.getAuthResponse().id_token);
+          
         }
+        
 
 
 
