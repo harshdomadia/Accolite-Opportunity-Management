@@ -41,7 +41,7 @@ describe('DialogBoxComponent Add', () => {
     beforeEach(async(() => {
       TestBed.configureTestingModule({
         declarations: [ DialogBoxComponent ],
-        imports: [ FormsModule, ReactiveFormsModule,FormsModule,BrowserAnimationsModule, HttpClientModule, RouterTestingModule, MatSnackBarModule, MatDialogModule, MatDialogRef ],
+        imports: [ FormsModule, ReactiveFormsModule,FormsModule,BrowserAnimationsModule, HttpClientModule, RouterTestingModule, MatSnackBarModule, MatDialogModule],
         providers: [
           { provide: MatDialogRef, useValue: dialogMock },
           { provide: MAT_DIALOG_DATA, useValue: [] } ]
@@ -54,7 +54,7 @@ describe('DialogBoxComponent Add', () => {
 
 
 
-    //////
+    
 
 
 
@@ -62,23 +62,23 @@ describe('DialogBoxComponent Add', () => {
 
   
  
-    /*
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule,FormsModule,BrowserAnimationsModule, HttpClientModule, RouterTestingModule, MatSnackBarModule, MatDialogModule, MatDialogRef ],
-      declarations: [ DialogBoxComponent ],
-      providers: [{
-        // I was expecting this will pass the desired value
-        provide: MAT_DIALOG_DATA,
-        useValue: {
-            action:"Add",
+    
+  // beforeEach(async(() => {
+  //   TestBed.configureTestingModule({
+  //     imports: [ReactiveFormsModule,FormsModule,BrowserAnimationsModule, HttpClientModule, RouterTestingModule, MatSnackBarModule, MatDialogModule],
+  //     declarations: [ DialogBoxComponent ],
+  //     providers: [{
+  //       // I was expecting this will pass the desired value
+  //       provide: MAT_DIALOG_DATA,
+  //       useValue: {
+  //           action:"Add",
             
-        }
-      }]
-    })
-    .compileComponents();
-  }));
-  */
+  //       }
+  //     }]
+  //   })
+  //   .compileComponents();
+  // }));
+  
   
   beforeEach(() => {
     //component.action = "Add";
@@ -92,7 +92,7 @@ describe('DialogBoxComponent Add', () => {
       let btn = fixture.debugElement.query(By.css('#CreateOpportunity'));
       
   });*/
-  /*
+  
 
   it('should create', () => {
     expect(component).toBeTruthy();
@@ -195,13 +195,54 @@ it('Pressing the Add Button',() => {
     //button.click();
     component.action = "Add";
     component.doAction();
+    //component.isSubmitted = true;
+    console.log(component.isSubmitted);
     
-    expect(window.alert).toHaveBeenCalledWith('Records Modified');
-
-
+    
+    expect(component.isSubmitted).toBeTrue();
+    
 
 });
-*/
+
+it('Pressing the Update Button',() => {
+
+    component.isSubmitted = false;
+    let opportunitydescription = component.ownerForm.controls['opportunitydescription'];
+    let manageremail = component.ownerForm.controls['manageremail'];
+    let location = component.ownerForm.controls['location'];
+    let skills = component.ownerForm.controls['skills'];
+    let openingcount = component.ownerForm.controls['openingcount'];
+    let projectduration = component.ownerForm.controls['projectduration'];
+    let lastdatetoapply = component.ownerForm.controls['lastdatetoapply'];
+    let experience = component.ownerForm.controls['experience'];
+    let managername = component.ownerForm.controls['managername'];
+    
+    opportunitydescription.setValue("Java Project");
+    location.setValue("Pune");
+    lastdatetoapply.setValue("2020-07-29");
+    skills.setValue("Java");
+    openingcount.setValue(0);
+    experience.setValue(1);
+    manageremail.setValue("vinay@accoliteindia.com");
+    projectduration.setValue(4);
+    managername.setValue("vinay");
+
+    spyOn(component, 'doAction');
+    spyOn(window, 'alert');
+
+    //let button = fixture.debugElement.nativeElement.querySelector('button');
+    //button.click();
+    component.action = "Update";
+    component.doAction();
+    //component.isSubmitted = true;
+    console.log(component.isSubmitted);
+    
+    
+    expect(component.isSubmitted).toBeTrue();
+    
+
+});
+
 
 
   

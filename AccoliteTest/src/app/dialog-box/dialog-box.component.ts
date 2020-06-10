@@ -33,6 +33,7 @@ export class DialogBoxComponent implements OnInit {
 
   action:string;
   local_data:any;
+  isSubmitted:boolean =  false;
 
 
   ngOnInit() {
@@ -48,6 +49,8 @@ export class DialogBoxComponent implements OnInit {
       experience:new FormControl('', [Validators.required, Validators.maxLength(100)]),
       managername:new FormControl('', [Validators.required, Validators.maxLength(100)]),
     });
+    
+    
   }
 
   constructor(
@@ -61,7 +64,9 @@ export class DialogBoxComponent implements OnInit {
 
   doAction(){
     if (this.ownerForm.valid && (this.action==='Add' || this.action==='Update')) {
+      this.isSubmitted = true;
       window.alert("Records Modified");
+      console.log("Records Modified");
       this.dialogRef.close({event:this.action,data:this.local_data});
     }
     else if (this.action==='Delete') {

@@ -60,7 +60,6 @@ import {UserServiceService} from './user-service.service';
       { path: '', component: LoginComponent }
    ]),
    MatDialogModule,
-   MatDialogModule,
    HttpClientModule,
    MatSortModule,
    MatPaginatorModule,
