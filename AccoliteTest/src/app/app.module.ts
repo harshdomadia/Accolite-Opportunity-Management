@@ -8,25 +8,27 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import { LoginComponent } from './login/login.component';
-import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './components/login/login.component';
+import { HomeComponent } from './components/home/home.component';
 import { MaterialModuleModule } from './material-module/material-module.module';
 import {FormsModule,ReactiveFormsModule} from '@angular/forms';
-import { HeaderComponent } from './header/header.component';
+import { HeaderComponent } from './components/header/header.component';
 import { RouterModule} from '@angular/router';
 import { MatDialogModule} from '@angular/material/dialog';
 import { MatTableModule} from '@angular/material/table';
-import { DialogBoxComponent } from './dialog-box/dialog-box.component';
+import { DialogBoxComponent } from './components/dialog-box/dialog-box.component';
 import { HttpClientModule } from '@angular/common/http';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import { TrendsComponent } from './trends/trends.component';
+import { TrendsComponent } from './components/trends/trends.component';
 //import { StorageServiceModule} from 'angular-webstorage-service';
 import { ChartsModule } from 'ng2-charts';
 import {MatSelectModule} from '@angular/material/select';
 import{ MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import {UserServiceService} from './user-service.service';
+import {UserServiceService} from './services/user-service.service';
+import {TrendsService} from './services/trends.service';
+
 
 
 
@@ -79,7 +81,7 @@ import {UserServiceService} from './user-service.service';
   entryComponents: [
     DialogBoxComponent
   ],
-  providers: [UserServiceService],
+  providers: [UserServiceService,TrendsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

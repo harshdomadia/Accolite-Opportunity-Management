@@ -2,7 +2,7 @@ import { Component,OnInit,ElementRef } from '@angular/core';
 import {Router} from '@angular/router';
 import {MatDialogModule} from '@angular/material/dialog';
 import { NgZone } from '@angular/core';
-import {UserServiceService} from '../user-service.service'
+import {UserServiceService} from '../../services/user-service.service';
 declare const gapi: any;
 @Component({
   selector: 'app-login',

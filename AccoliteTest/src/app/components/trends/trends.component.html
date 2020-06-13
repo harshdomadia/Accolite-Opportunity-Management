@@ -2,8 +2,8 @@
 
 
 
-
-<div class="chart-wrapper" style="max-height: 1000px; max-width: 1000px; height:70%;width:70%;">
+<div>
+  <div class="chart-wrapper" style="max-height: 1000px; max-width: 1000px; height:70%;width:70%;">
     <h3 style="text-align: center;">Year vs Language Distribution</h3>
 
     <div select  style="align-content: center;">
@@ -23,7 +23,7 @@
           </mat-select>
         </mat-form-field>
   
-  </div>
+    </div>
   
 
 
@@ -35,5 +35,37 @@
     [legend]="chartLegend"
     [chartType]="chartType"
     >
-  </canvas>
+    </canvas> 
+  </div>
+
+
+
+  <div class="chart-wrapper" style="max-height: 1000px; max-width: 1000px; height:70%;width:70%;">
+    <h3 style="text-align: center;">Skill Wise Project Distribution</h3>
+
+    <div select  style="align-content: center;">
+      <mat-form-field>
+          <mat-label>Select Chart Type</mat-label>
+          <mat-select [(value)]="selectedSkillWise" #chartValue (selectionChange)="changeChartSkills($event.value)">
+
+            <mat-option [value]="option.value" *ngFor="let option of chartsSkillWise" >{{ option.viewValue }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+  
+
+
+    <div class="chart-wrapper">
+      <canvas baseChart
+      [datasets]="chartDataSkillWise"
+      [options]="chartOptionsSkillWise"
+      [labels]="chartLabelsSkillWise"
+      [chartType]="chartTypeSkill">
+    </canvas>
+  </div>
+    
+  </div>
+
+
+
 </div>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import { NgZone } from '@angular/core';
-import {UserServiceService} from '../user-service.service'
+import {UserServiceService} from '../../services/user-service.service';
 import {MatMenu,MatMenuContent} from '@angular/material/menu';
 
 

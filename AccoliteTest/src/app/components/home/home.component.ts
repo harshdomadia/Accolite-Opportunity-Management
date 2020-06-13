@@ -7,7 +7,7 @@ import { MatTable} from '@angular/material/table';
 import {DialogBoxComponent} from '../dialog-box/dialog-box.component';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
-import { Applicant } from '../models/applicant.model';
+import { Applicant } from '../../models/applicant.model';
 //import { ApplicantService } from './applicant.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Router} from '@angular/router';
